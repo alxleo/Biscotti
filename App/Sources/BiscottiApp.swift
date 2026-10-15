@@ -202,7 +202,11 @@ private struct MenuBarRootLabel: View {
         if let menuBarVM = launchState.menuBarViewModel {
             MenuBarLabelView(viewModel: menuBarVM)
         } else {
-            Image(systemName: "circle.dotted.circle")
+            Image(
+                nsImage: MenuBarLabelView.menuBarNSImage(
+                    named: MenuBarLabelView.idleIconName
+                )
+            )
         }
     }
 }
