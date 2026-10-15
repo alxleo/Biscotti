@@ -92,9 +92,7 @@ public final class MenuBarViewModel {
         Array(core.summaries.prefix(2))
     }
 
-    /// SF Symbol name for the record/stop action line.
-    /// Matches the two-state icons used by `MenuBarLabelView`:
-    /// `"circle.dotted.circle"` (idle) and `"record.circle.fill"` (recording).
+    /// SF Symbol name for the record/stop action in the menu body.
     public var recordActionIcon: String {
         isRecording ? "record.circle.fill" : "circle.dotted.circle"
     }
