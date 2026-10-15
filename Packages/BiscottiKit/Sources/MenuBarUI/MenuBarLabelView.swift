@@ -18,8 +18,8 @@ public struct MenuBarLabelView: View {
     public static let recordingIconName = "MenuBarIconRecording"
 
     /// Height in points for the menu-bar icon. Standard macOS status
-    /// items are ~18pt tall; the width scales from the SVG aspect ratio.
-    private static let iconHeight: CGFloat = 18
+    /// items are ~16pt tall; the width scales from the SVG aspect ratio.
+    private static let iconHeight: CGFloat = 16
 
     public init(viewModel: MenuBarViewModel) {
         self.viewModel = viewModel
