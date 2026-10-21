@@ -87,6 +87,7 @@ let package = Package(
         .target(
             name: "ImportExport",
             dependencies: [
+                "AppLinks",
                 "DataStore",
                 "Formatting"
             ],
@@ -94,7 +95,7 @@ let package = Package(
         ),
         .testTarget(
             name: "ImportExportTests",
-            dependencies: ["ImportExport", "DataStore", "Formatting"],
+            dependencies: ["ImportExport", "AppLinks", "DataStore", "Formatting"],
             swiftSettings: warningsAsErrors
         ),
         .target(
