@@ -683,7 +683,7 @@ private extension MeetingDetailView {
     }
 
     var tabBar: some View {
-        HStack {
+        HStack(spacing: 12) {
             Picker("", selection: $viewModel.selectedTab) {
                 ForEach(MeetingDetailViewModel.Tab.allCases, id: \.self) { option in
                     Text(option.rawValue).tag(option)
@@ -696,6 +696,15 @@ private extension MeetingDetailView {
 
             if viewModel.selectedTab == .transcript, viewModel.versions.count > 1 {
                 versionPicker
+            }
+
+            ForEach(viewModel.sendDestinations, id: \.self) { destination in
+                SendToButton(
+                    destination: destination,
+                    enabled: viewModel.canSend
+                ) {
+                    Task { await viewModel.sendTapped(destination) }
+                }
             }
 
             Button {
@@ -715,25 +724,18 @@ private extension MeetingDetailView {
                     didCopy = false
                 }
             } label: {
-                Label(
-                    didCopy ? "Copied" : "Copy",
-                    systemImage: didCopy ? "checkmark" : "doc.on.doc"
-                )
+                HStack(spacing: 3) {
+                    Image(systemName: didCopy ? "checkmark" : "doc.on.doc")
+                    Text(didCopy ? "Copied" : "Copy")
+                }
                 .transaction { $0.animation = nil }
             }
             .buttonStyle(.borderless)
             .controlSize(.small)
             .foregroundStyle(didCopy ? .sage : .inkSecondary)
             .disabled(!canCopy)
-
-            ForEach(viewModel.sendDestinations, id: \.self) { destination in
-                SendToButton(
-                    destination: destination,
-                    enabled: viewModel.canSend
-                ) {
-                    Task { await viewModel.sendTapped(destination) }
-                }
-            }
+            .help("Copy to Clipboard")
+            .accessibilityLabel(didCopy ? "Copied" : "Copy")
         }
     }
 

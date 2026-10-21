@@ -24,7 +24,7 @@ remembers *that* it sent it. It does not track the note's identity in the other 
 
 ## 2. Behaviour summary
 
-- One small icon button per **installed** destination sits right of the meeting detail tab bar's Copy button, in the order Obsidian, Bear, Apple Notes.
+- One small icon button per **installed** destination sits left of the meeting detail tab bar's Copy button (Copy is at the far right), in the order Obsidian, Bear, Apple Notes.
 - The same actions are in the `…` menu → **Send to ▸**.
 - The content is always the whole meeting (title + metadata + summary + notes), whichever tab is shown.
 
@@ -157,8 +157,8 @@ Only two alerts exist: the size fallback (§7.4) and "Already sent" (§10.4). Ev
 ## 10. UI
 
 ### 10.1 Buttons
-- They sit in the meeting detail tab bar, right of Copy, with the same control size and style (`.borderless`, `.controlSize(.small)`, `.inkSecondary`). The icons have no labels.
-- **Icons:** user-supplied outline SVGs in `DesignSystem/Resources/Icons/` (`obsidian-outline.svg`, `bear-outline-plain.svg`, `apple-notes-outline.svg`). They are rendered as template images at the size of Copy's symbol (~14 pt).
+- They sit in the meeting detail tab bar, left of Copy (Copy is at the far right), with the same control size and style (`.borderless`, `.controlSize(.small)`, `.inkSecondary`). The icons have no labels.
+- **Icons:** user-supplied outline SVGs in `DesignSystem/Resources/Icons/` (`obsidian-outline.svg`, `bear-outline-plain.svg`, `apple-notes-outline.svg`). They are rendered as template images at ~17 pt (20% larger than Copy's symbol, ~14 pt). The Copy button keeps its default size.
 - There is no state dot.
 
 ### 10.2 Tooltip = accessibility label
@@ -188,7 +188,9 @@ The `…` overflow menu in the meeting header gets a **Send to ▸** submenu wit
 4. All: first send; repeat click unchanged → Open, Send Again and Cancel; repeat after an edit → "changed" text; the Notes import is cancelled → the record still exists → the alert shows on the next click; a meeting with no tags; a unicode-heavy title; two meetings with the same title on the same day; nothing to send → disabled; an app not installed → hidden.
 5. Over 500 KB → clipboard fallback (use a padded test meeting).
 
-The findings are written back into this spec. Any behaviour change is added to §12.
+**Validation run (2026-10-21): all steps passed.** No failures, no behaviour changes, no fixes needed. See `manual_validation.md` for the full script and per-step results.
+
+**Known limitation (accepted):** Notes puts each import into a new folder: the first send lands in "Imported Notes", the next in "Imported Notes 1", and so on. Notes chooses the folder; the file hand-off cannot change it. Only a different transport (AppleScript, or the Notes share sheet) can target the default folder, and §13 excludes those. We keep the import transport and accept the extra folders.
 
 ## 12. Deviations from the overview (call out in the PR)
 - **D1 "Send, not sync"** (approved): no x-callbacks, locators, open-existing or update-in-place for Bear and Obsidian. All three use the Notes-style record + alert. "Open <App>" only makes the app active.

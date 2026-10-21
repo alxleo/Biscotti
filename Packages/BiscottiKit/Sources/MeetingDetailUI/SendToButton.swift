@@ -4,7 +4,7 @@ import SwiftUI
 
 /// A small icon button that sends the meeting to a third-party app.
 ///
-/// Rendered at 14 pt as a template image with the same style as the
+/// Rendered at 17 pt as a template image with the same style as the
 /// Copy button in the tab bar: `.borderless`, `.controlSize(.small)`,
 /// `.foregroundStyle(.inkSecondary)`.
 struct SendToButton: View {
@@ -28,7 +28,7 @@ struct SendToButton: View {
         Button(action: action) {
             Image(nsImage: ExportIcons.image(iconKind))
                 .resizable()
-                .frame(width: 14, height: 14)
+                .frame(width: 17, height: 17)
         }
         .buttonStyle(.borderless)
         .controlSize(.small)
