@@ -149,6 +149,7 @@ public struct SentExport: Codable, Sendable, Equatable {
   - If it is cheap (well under 1 ms in total), look them up live on each view refresh. There is no cache.
   - If it is not cheap, cache the results in memory and refresh at launch and on `NSApplication.didBecomeActiveNotification`.
   - Record the measured number and the choice in this section.
+  - **Decision (Phase 2):** Measured ~0.1 ms total for all three lookups in a debug build on Apple Silicon. Live lookup on each call, no cache.
 
 ## 9. Errors
 Only two alerts exist: the size fallback (§7.4) and "Already sent" (§10.4). Everything else fails quietly with a log entry: an `open` that returns false, a Notes completion error, or a temp-file write error. No record is written on failure. There is no double-click guard; a fast double click can send two notes, and this is accepted.
